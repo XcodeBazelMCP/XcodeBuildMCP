@@ -148,12 +148,12 @@ describe('Bazel argument helpers', () => {
     expect(modeArgs('release_with_symbols')).toEqual(['--config=ios_release', '--config=generate_dsym']);
 
     expect(platformArgs('none')).toEqual([]);
-    expect(platformArgs('simulator')).toEqual(['--ios_multi_cpus=sim_arm64']);
-    expect(platformArgs('device')).toEqual(['--ios_multi_cpus=arm64']);
-    expect(platformArgs('macos')).toEqual([]);
-    expect(platformArgs('tvos')).toEqual(['--tvos_cpus=sim_arm64']);
-    expect(platformArgs('watchos')).toEqual(['--watchos_cpus=arm64']);
-    expect(platformArgs('visionos')).toEqual(['--visionos_cpus=sim_arm64']);
+    expect(platformArgs('simulator')).toEqual(['--platforms=@build_bazel_apple_support//platforms:ios_sim_arm64', '--ios_multi_cpus=sim_arm64']);
+    expect(platformArgs('device')).toEqual(['--platforms=@build_bazel_apple_support//platforms:ios_arm64', '--ios_multi_cpus=arm64']);
+    expect(platformArgs('macos')).toEqual(['--platforms=@build_bazel_apple_support//platforms:darwin_arm64']);
+    expect(platformArgs('tvos')).toEqual(['--platforms=@build_bazel_apple_support//platforms:tvos_sim_arm64', '--tvos_cpus=sim_arm64']);
+    expect(platformArgs('watchos')).toEqual(['--platforms=@build_bazel_apple_support//platforms:watchos_arm64', '--watchos_cpus=arm64']);
+    expect(platformArgs('visionos')).toEqual(['--platforms=@build_bazel_apple_support//platforms:visionos_sim_arm64', '--visionos_cpus=sim_arm64']);
   });
 
   it('maps simulator and config options to Bazel flags', () => {
@@ -181,6 +181,7 @@ describe('Bazel argument helpers', () => {
     ).toEqual([
       'build',
       '--config=debug',
+      '--platforms=@build_bazel_apple_support//platforms:ios_sim_arm64',
       '--ios_multi_cpus=sim_arm64',
       '--ios_simulator_device=iPhone 16 Pro',
       '--config=local',
@@ -202,6 +203,7 @@ describe('Bazel argument helpers', () => {
     ).toEqual([
       'build',
       '--config=ios_release',
+      '--platforms=@build_bazel_apple_support//platforms:ios_arm64',
       '--ios_multi_cpus=arm64',
       '//:MyApp',
     ]);

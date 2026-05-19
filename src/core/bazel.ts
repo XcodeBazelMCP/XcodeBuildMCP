@@ -72,17 +72,17 @@ export function platformArgs(platform?: BuildPlatform): string[] {
     case 'none':
       return [];
     case 'simulator':
-      return ['--ios_multi_cpus=sim_arm64'];
+      return ['--platforms=@build_bazel_apple_support//platforms:ios_sim_arm64', '--ios_multi_cpus=sim_arm64'];
     case 'device':
-      return ['--ios_multi_cpus=arm64'];
+      return ['--platforms=@build_bazel_apple_support//platforms:ios_arm64', '--ios_multi_cpus=arm64'];
     case 'macos':
-      return [];
+      return ['--platforms=@build_bazel_apple_support//platforms:darwin_arm64'];
     case 'tvos':
-      return ['--tvos_cpus=sim_arm64'];
+      return ['--platforms=@build_bazel_apple_support//platforms:tvos_sim_arm64', '--tvos_cpus=sim_arm64'];
     case 'watchos':
-      return ['--watchos_cpus=arm64'];
+      return ['--platforms=@build_bazel_apple_support//platforms:watchos_arm64', '--watchos_cpus=arm64'];
     case 'visionos':
-      return ['--visionos_cpus=sim_arm64'];
+      return ['--platforms=@build_bazel_apple_support//platforms:visionos_sim_arm64', '--visionos_cpus=sim_arm64'];
     default: {
       const _exhaustive: never = p;
       throw new Error(`Unknown platform: ${_exhaustive}`);

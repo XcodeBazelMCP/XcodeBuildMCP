@@ -81,7 +81,8 @@ export const definitions: ToolDefinition[] = [
         },
         platform: {
           type: 'string',
-          enum: ['none', 'simulator', 'device'],
+          enum: ['none', 'simulator', 'device', 'macos', 'tvos', 'watchos', 'visionos'],
+          description: 'Target platform. Use "simulator" for iOS sim, "device" for iOS device, "macos" for macOS, or "none" to skip platform flags.',
         },
         simulatorName: { type: 'string' },
         simulatorVersion: { type: 'string' },

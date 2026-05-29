@@ -24,7 +24,14 @@ const mockListSimulators = vi.mocked(simulators.listSimulators);
 const mockShutdownSimulator = vi.mocked(simulators.shutdownSimulator);
 const mockDeleteSimulator = vi.mocked(simulators.deleteSimulator);
 
-const mockSuccess: CommandResult = { exitCode: 0, output: '', command: 'xcrun simctl' };
+const mockSuccess: CommandResult = {
+  command: 'xcrun',
+  args: ['simctl'],
+  exitCode: 0,
+  output: '',
+  durationMs: 10,
+  truncated: false,
+};
 
 describe('isTestSimulatorFlagEnabled', () => {
   it('accepts boolean and string truthy values', () => {
